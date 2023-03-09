@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const userRoute = require("./routes/userRoute");
 
 //express app
 const app = express();
@@ -10,6 +11,9 @@ const app = express();
 //Middlwares app
 app.use(express.json());
 app.use(cors());
+
+//endpoints
+app.use("/api/user", userRoute);
 
 const PORT = process.env.PORT || 4000;
 
@@ -20,6 +24,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
+    //listening for requests
     app.listen(PORT, (req, res) => {
       console.log(`connect to DB server running on port ${PORT}`);
     });
@@ -27,5 +32,3 @@ mongoose
   .catch((err) => {
     console.log(err.meassage);
   });
-
-//listening for requests
