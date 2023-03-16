@@ -41,7 +41,7 @@ const findAsingleChat = async (req, res) => {
   const { firstId, secondId } = req.params;
 
   try {
-    const Chat = await chatModel.find({
+    const chat = await chatModel.find({
       members: { $all: [firstId, secondId] },
     });
 
